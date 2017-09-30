@@ -2,5 +2,6 @@
 d:\onedrive - vietscience\ctdl\bc\homework4\3\3.cpp(23): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
 d:\onedrive - vietscience\ctdl\bc\homework4\3\3.cpp(161): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
 d:\onedrive - vietscience\ctdl\bc\homework4\3\3.cpp(179): warning C4018: '<': signed/unsigned mismatch
+d:\onedrive - vietscience\ctdl\bc\homework4\3\3.cpp(206): warning C4715: 'findNumPoly': not all control paths return a value
   3.vcxproj -> D:\OneDrive - vietscience\CTDL\BC\homework4\Debug\3.exe
   3.vcxproj -> D:\OneDrive - vietscience\CTDL\BC\homework4\Debug\3.pdb (Partial PDB)

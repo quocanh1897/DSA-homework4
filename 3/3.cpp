@@ -184,9 +184,8 @@ void inputPoly(node *&poly, string input1) {
 			token = input1.substr(prepos, pos - prepos + 1);
 			stringstream scin(token);
 			scin >> hesoIn >> x >> mu >> muIn;
-			cin.ignore(256, '\n');
+			//cin.ignore(256, '\n');
 		
-
 			addNode(poly, hesoIn, muIn);
 			prepos = pos;
 		}
@@ -195,11 +194,22 @@ void inputPoly(node *&poly, string input1) {
 	
 }
 
+node *findNumPoly(polyNode *polyHead, int num) {
+	polyNode *temp = polyHead;
+	int i = 1;
+	while (temp != NULL) {
+		if (num == i)
+			return temp->poly;
+		temp = temp->next;
+		i++;
+	}
+}
+
 int main() {
 	polyNode *poly = NULL;
 	string input1 = "", input2 = "";
 	char ans;
-	cout << "Start to input polynomial" << endl;
+	cout << "\t Start to input polynomial \n" << endl;
 	int i = 0;
 	do {
 		polyNode *newPolyNode = new polyNode;
@@ -213,14 +223,16 @@ int main() {
 
 		cout << "continue input polynomial or not? ";
 		cin >> ans;
+		cin.ignore(256, '\n');
 		if (ans == 'n' || ans == 'N') break;
 	} while (ans == 'y' || ans == 'Y');
 
-	cout << "Stop input polynomial" << endl;
-	cout << "Perform math operations: (Pi add/sub/mul/div Pj)" << endl;
+	cout << endl;
+	cout << "\t Stop input polynomial \n" << endl;
+	cout << "\t Perform math operations: (Pi add/sub/mul/div Pj)" << endl;
 	char P;
 	int numPolyA, numPolyB;
-	cout << endl;
+	
 	string operatorIn;
 	do {
 		
@@ -228,11 +240,24 @@ int main() {
 		stringstream ss(input2);
 		ss >> P >> numPolyA >> operatorIn >> P >> numPolyB;
 		cin.ignore(256, '\n');
-		
+
+		if (operatorIn == "add" || operatorIn == "Add" || operatorIn == "ADD") {
+			node *polyA = findNumPoly(poly, numPolyA);
+			node *polyB = findNumPoly(poly, numPolyB);
+			printPoly(addPoly(polyA, polyB));
+
+		}
+
+		else if (operatorIn == "mul" || operatorIn == "Mul" || operatorIn == "MUL") {
+			node *polyA = findNumPoly(poly, numPolyA);
+			node *polyB = findNumPoly(poly, numPolyB);
+			printPoly(mulPoly(polyA, polyB));
+		}
+
+		cout << "continue or not? ";
+		cin >> ans;
+		cin.ignore(256, '\n');
 	} while (ans == 'y' || ans == 'Y');
 
-	
-	poly = poly->next;
-	printPoly(poly->poly);
 	system("pause");
 }
