@@ -18,10 +18,11 @@ struct polyNode {
 node* ConvertToLinkedList(int *arr, int size) {
 	node *head = NULL;
 	node *pre = NULL;
-	for (int i = 0; i < size; i++) {
+	for (int i = size - 1 ; i >= 0; i--) {
 		node *cur = new node;
 		cur->heso = arr[i];
-		if (i == 0) {
+		cur->mu = i;
+		if (i == size - 1 ) {
 			head = cur;
 			pre = head;
 		}
@@ -91,15 +92,21 @@ void printPoly(node *llist) {
 		while (temp != NULL) {
 			
 			if (temp == llist) {
-				if (temp->mu == 1)
-					cout << temp->heso << "x";
-				else if (temp->mu == 0)
-					cout << temp->heso;
-				else 
+				if (temp->heso == 1) {
+					cout << "x^" << temp->mu;
+					if (temp->mu == 1)
+						cout << temp->heso << "x";
+					else if (temp->mu == 0)
+						cout << temp->heso;	
+				}
+				else
 					cout << temp->heso << "x^" << temp->mu;
 			}
-			else if (temp->heso == 0);
 
+			else if (temp->heso == 0);
+			else if (temp->heso == 1) {
+				cout << " + " << "x" << temp->mu;
+			}
 			else if (temp->mu == 1) {
 				cout << " + " << temp->heso << "x";
 			}
@@ -196,30 +203,37 @@ node *addPoly(node *poly1, node *poly2) {
 node *mulPoly(node *poly1, node *poly2) {
 
 	node *temp1 = poly1, *temp2 = poly2;
-	int count1 = 0, count2 = 0, bac = 0;
-	while (temp1 != NULL) {
-		count1++;
-		temp1 = temp1->next;
-	}
-	while (temp2 != NULL) {
-		count2++;
-		temp2 = temp2->next;
-	}
-	bac = count1 + count2 - 2;
-	temp1 = poly1;
-	temp2 = poly2;
+
+	int bac = poly1->mu + poly2->mu;
+
 	int *res = new int[bac + 1];//da thuc bac  0 1 2 3 ...
 	for (int i = 0; i < bac + 1; i++) res[i] = 0;//gan array = 0
+	
+	for (int i = poly1->mu; i >= 0; i--) {
+		for (int j = poly2->mu; j >= 0; j--) {
+			int tich1 = 0, tich2 = 0;
 
-	for (int i = 0; i < count1; i++) {
-		for (int j = 0; j < count2; j++) {
-			res[i + j] += temp1->heso*temp2->heso;
-			temp2 = temp2->next;
+			while (temp1 != NULL) {
+				if (temp1->mu == i) {
+					tich1 = temp1->heso;
+					break;
+				}
+				temp1 = temp1->next;
+			}
+			while (temp2 != NULL) {
+				if (temp2->mu == j) {
+					tich2 = temp2->heso;
+					break;
+				}
+				temp2 = temp2->next;
+			}
+			temp1 = poly1;//khoi phuc vi tri con tro
+			temp2 = poly2;
+
+			res[i + j] += tich1 * tich2;
+			
 		}
-		temp2 = poly2;
-		temp1 = temp1->next;
 	}
-
 	return ConvertToLinkedList(res, bac + 1);
 }
 
@@ -243,8 +257,12 @@ void inputPoly(node *&poly, string input1) {
 			stringstream scin(token);
 
 			if (token.substr(0, 1) == "x") {//truong hop k co he so truoc x
-				scin >> x >> mu >> muIn;
-				hesoIn = 1;
+				if (token.find('^') > 999) 
+					muIn = 1;
+				else {
+					hesoIn = 1;
+					scin >> x >> mu >> muIn;
+				}
 			}
 			else if (token.find('^') > 999) {
 				if (token.find('x') > 999) {
