@@ -83,59 +83,114 @@ void addPolyNode(polyNode *&head, polyNode *polyIn) {
 
 
 void printPoly(node *llist) {
+	cout << endl;
 	node *temp = llist;
-	if (temp == NULL)cout << "da thuc 0" << endl;
+	if (temp == NULL)
+		cout << "da thuc 0" << endl;
 	else {
 		while (temp != NULL) {
+			
 			if (temp == llist) {
-				cout << temp->heso << "x^" << temp->mu;
+				if (temp->mu == 1)
+					cout << temp->heso << "x";
+				else if (temp->mu == 0)
+					cout << temp->heso;
+				else 
+					cout << temp->heso << "x^" << temp->mu;
 			}
+			else if (temp->heso == 0);
+
 			else if (temp->mu == 1) {
-				cout << "+" << temp->heso << "x";
+				cout << " + " << temp->heso << "x";
 			}
 			else if (temp->mu == 0) {
-				cout << "+" << temp->heso;
+				cout << " + " << temp->heso;
 			}
 			else 
-				cout << "+" << temp->heso << "x^" << temp->mu;
-
+				cout << " + " << temp->heso << "x^" << temp->mu;
+			
 			temp = temp->next;
 		}
 	}
-	cout << endl;
+	cout << endl << endl;
 }
 
 node *addPoly(node *poly1, node *poly2) {
 	node *temp1 = poly1, *temp2 = poly2;
-	node *resHead = NULL, *pre = NULL;
+	node *pre = NULL;
 	int i = 0;
-	while (temp1 != NULL || temp2 != NULL) {
+	node *headRes = new node;
+
+	if (temp1->mu > temp2->mu) {
+		headRes->heso = temp1->heso;
+		headRes->mu = temp1->mu;
+	}
+	else if (temp1->mu < temp2->mu) {
+		headRes->heso = temp2->heso;
+		headRes->mu = temp2->mu;
+	}
+	else {
+		headRes->heso = temp2->heso + temp1->heso;
+		headRes->mu = temp2->mu;
+	}
+	int maxMu = headRes->mu;
+	for (int i = maxMu - 1; i >= 0; i--) {
 		node *cur = new node;
-		int a = 0, b = 0;
-		if (temp1 == NULL) {//truong hop poly1 ngan hon
-			cur->heso = temp2->heso;
+		cur->mu = i;
+
+		while (temp1 != NULL) { // duyet linkedList1 tim so hang co bac cua cur.
+			if (temp1->mu == cur->mu) {
+				cur->heso += temp1->heso;
+				break;
+			}
+			temp1 = temp1->next;	
+		}
+		while (temp2 != NULL) { // duyet linkedList2 tim so hang co bac cua cur.
+			if (temp2->mu == cur->mu) {
+				cur->heso += temp2->heso;
+				break;
+			}
 			temp2 = temp2->next;
 		}
-		else if (temp2 == NULL) {//truong hop poly2 ngan hon
-			cur->heso = temp1->heso;
-			temp1 = temp1->next;
-		}
-		else {//poyly1+poyly2
-			cur->heso = temp1->heso + temp2->heso;
-			temp1 = temp1->next;
-			temp2 = temp2->next;
-		}
-		if (i == 0) {//cap phat cho poly ket qua
-			resHead = cur;
-			pre = resHead;
+		temp1 = poly1; //khoi phuc vi tri con tro temp1 temp2
+		temp2 = poly2;
+
+		if (i == maxMu - 1) {
+			headRes->next = cur;
+			pre = cur;
 		}
 		else {
 			pre->next = cur;
 			pre = cur;
 		}
-		i++;
+
 	}
-	return resHead;
+		//if (temp1 == NULL) { //truong hop poly1 bac cao hon
+		//	cur->heso = temp2->heso;
+		//	cur->mu = temp2->mu;
+		//	temp2 = temp2->next;
+		//}
+		//else if (temp2 == NULL) { //truong hop poly2 bac thap hon
+		//	cur->heso = temp1->heso;
+		//	cur->mu = temp1->mu;
+		//	temp1 = temp1->next;
+		//}
+		//else {//poyly1+poyly2
+		//	if (temp1->mu == temp2->mu)
+		//		cur->heso = temp1->heso + temp2->heso;
+		//	temp1 = temp1->next;
+		//	temp2 = temp2->next;
+		//}
+		//if (i == 0) {//cap phat cho poly ket qua
+		//	resHead = cur;
+		//	pre = resHead;
+		//}
+		//else {
+		//	pre->next = cur;
+		//	pre = cur;
+		//}
+
+	return headRes;
 }
 
 node *mulPoly(node *poly1, node *poly2) {
@@ -168,7 +223,7 @@ node *mulPoly(node *poly1, node *poly2) {
 	return ConvertToLinkedList(res, bac + 1);
 }
 
-
+// scan input1 from console (string) to the polynomial 
 void inputPoly(node *&poly, string input1) {
 	
 	char x, mu;
@@ -181,10 +236,31 @@ void inputPoly(node *&poly, string input1) {
 		if (input1[i] == '+' || input1[i] == '-' ||
 			input1[i] == ' ' || i == input1.size() - 1) {
 			pos = i;
-			token = input1.substr(prepos, pos - prepos + 1);
+			if (i == input1.size() - 1) {
+				pos++;
+			}
+			token = input1.substr(prepos, pos - prepos );
 			stringstream scin(token);
-			scin >> hesoIn >> x >> mu >> muIn;
-			//cin.ignore(256, '\n');
+
+			if (token.substr(0, 1) == "x") {//truong hop k co he so truoc x
+				scin >> x >> mu >> muIn;
+				hesoIn = 1;
+			}
+			else if (token.find('^') > 999) {
+				if (token.find('x') > 999) {
+					scin >> hesoIn;
+					muIn = 0;
+				}
+				else {
+					scin >> hesoIn;
+					muIn = 1;
+				}
+				
+			}
+			
+			else
+				scin >> hesoIn >> x >> mu >> muIn;
+			//cin.ignore(256, '\n'); x^4+3x^3+1
 		
 			addNode(poly, hesoIn, muIn);
 			prepos = pos;
@@ -238,7 +314,7 @@ int main() {
 		getline(cin, input2);
 		stringstream ss(input2);
 		ss >> P >> numPolyA >> operatorIn >> P >> numPolyB;
-		cin.ignore(256, '\n');
+		//cin.ignore(256, '\n');
 
 		if (operatorIn == "add" || operatorIn == "Add" || operatorIn == "ADD") {
 			node *polyA = findNumPoly(poly, numPolyA);
