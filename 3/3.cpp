@@ -229,13 +229,12 @@ int main() {
 
 	cout << endl;
 	cout << "\t Stop input polynomial \n" << endl;
-	cout << "\t Perform math operations: (Pi add/sub/mul/div Pj)" << endl;
 	char P;
 	int numPolyA, numPolyB;
 	
 	string operatorIn;
 	do {
-		
+		cout << "Perform math operations: (Pi add/sub/mul/div Pj)" << endl;
 		getline(cin, input2);
 		stringstream ss(input2);
 		ss >> P >> numPolyA >> operatorIn >> P >> numPolyB;
