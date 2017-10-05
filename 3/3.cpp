@@ -103,11 +103,13 @@ void printPoly(node *llist) {
 		while (temp != NULL) {	
 			if (temp == llist) {// so hang dau tien cua da thuc
 				if (temp->heso == 1) {
-					cout << "x^" << temp->mu;
+					
 					if (temp->mu == 1)
-						cout << temp->heso << "x";
+						cout << "x";
 					else if (temp->mu == 0)
 						cout << temp->heso;
+					else 
+						cout << "x^" << temp->mu;
 				}
 				else if (temp->mu == 1)
 					cout << temp->heso << "x";

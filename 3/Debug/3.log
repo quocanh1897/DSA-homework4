@@ -1,21 +1,21 @@
 ﻿  3.cpp
-d:\onedrive - vietscience\ctdl\bc\homework4\3\3.cpp(307): warning C4018: '<': signed/unsigned mismatch
-d:\onedrive - vietscience\ctdl\bc\homework4\3\3.cpp(414): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-d:\onedrive - vietscience\ctdl\bc\homework4\3\3.cpp(422): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-d:\onedrive - vietscience\ctdl\bc\homework4\3\3.cpp(433): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-d:\onedrive - vietscience\ctdl\bc\homework4\3\3.cpp(441): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-d:\onedrive - vietscience\ctdl\bc\homework4\3\3.cpp(460): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-d:\onedrive - vietscience\ctdl\bc\homework4\3\3.cpp(468): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-d:\onedrive - vietscience\ctdl\bc\homework4\3\3.cpp(479): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-d:\onedrive - vietscience\ctdl\bc\homework4\3\3.cpp(487): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-d:\onedrive - vietscience\ctdl\bc\homework4\3\3.cpp(505): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-d:\onedrive - vietscience\ctdl\bc\homework4\3\3.cpp(513): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-d:\onedrive - vietscience\ctdl\bc\homework4\3\3.cpp(524): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-d:\onedrive - vietscience\ctdl\bc\homework4\3\3.cpp(532): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-d:\onedrive - vietscience\ctdl\bc\homework4\3\3.cpp(550): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-d:\onedrive - vietscience\ctdl\bc\homework4\3\3.cpp(558): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-d:\onedrive - vietscience\ctdl\bc\homework4\3\3.cpp(569): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-d:\onedrive - vietscience\ctdl\bc\homework4\3\3.cpp(577): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-d:\onedrive - vietscience\ctdl\bc\homework4\3\3.cpp(371): warning C4715: 'findNumPoly': not all control paths return a value
+d:\onedrive - vietscience\ctdl\bc\homework4\3\3.cpp(309): warning C4018: '<': signed/unsigned mismatch
+d:\onedrive - vietscience\ctdl\bc\homework4\3\3.cpp(416): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+d:\onedrive - vietscience\ctdl\bc\homework4\3\3.cpp(424): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+d:\onedrive - vietscience\ctdl\bc\homework4\3\3.cpp(435): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+d:\onedrive - vietscience\ctdl\bc\homework4\3\3.cpp(443): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+d:\onedrive - vietscience\ctdl\bc\homework4\3\3.cpp(462): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+d:\onedrive - vietscience\ctdl\bc\homework4\3\3.cpp(470): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+d:\onedrive - vietscience\ctdl\bc\homework4\3\3.cpp(481): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+d:\onedrive - vietscience\ctdl\bc\homework4\3\3.cpp(489): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+d:\onedrive - vietscience\ctdl\bc\homework4\3\3.cpp(507): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+d:\onedrive - vietscience\ctdl\bc\homework4\3\3.cpp(515): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+d:\onedrive - vietscience\ctdl\bc\homework4\3\3.cpp(526): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+d:\onedrive - vietscience\ctdl\bc\homework4\3\3.cpp(534): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+d:\onedrive - vietscience\ctdl\bc\homework4\3\3.cpp(552): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+d:\onedrive - vietscience\ctdl\bc\homework4\3\3.cpp(560): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+d:\onedrive - vietscience\ctdl\bc\homework4\3\3.cpp(571): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+d:\onedrive - vietscience\ctdl\bc\homework4\3\3.cpp(579): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+d:\onedrive - vietscience\ctdl\bc\homework4\3\3.cpp(373): warning C4715: 'findNumPoly': not all control paths return a value
   3.vcxproj -> D:\OneDrive - vietscience\CTDL\BC\homework4\Debug\3.exe
   3.vcxproj -> D:\OneDrive - vietscience\CTDL\BC\homework4\Debug\3.pdb (Partial PDB)
