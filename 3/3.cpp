@@ -304,7 +304,7 @@ void inputPoly(node *&poly, string input1) {
 	int muIn = 0;
 	string token = "";
 	size_t pos = 0, prepos = 0;
-	for (int i = 1; i < input1.size(); i++) {
+	for (int i = 0; i < input1.size(); i++) {
 
 		if (input1[i] == '+' || input1[i] == '-' ||
 			input1[i] == ' ' || i == input1.size() - 1) {
