@@ -198,7 +198,6 @@ node *addPoly(node *poly1, node *poly2) {
 	return headRes;
 }
 
-
 node *subPoly(node *poly1, node *poly2) {
 	node* temp = NULL, *result = NULL;
 	while (1)
@@ -298,6 +297,15 @@ node *divPoly(node *poly1, node *poly2) {
 	return result;
 }
 
+float calPoly(node *poly1, float num) {
+	node *temp = poly1;
+	float res = 0;
+	while (temp != NULL) {
+		res += temp->heso*pow(num , temp->mu);
+		temp = temp->next;
+	}
+	return res;
+}
 // scan input1 from console (string) to the polynomial 
 void inputPoly(node *&poly, string input1) {
 	
@@ -406,7 +414,7 @@ int main() {
 		stringstream ss(input2);
 		ss >> P1 >> numPolyA >> operatorIn >> P2 >> numPolyB;
 		//cin.ignore(256, '\n');
-
+		
 		if (operatorIn == "add" || operatorIn == "Add" || operatorIn == "ADD" || operatorIn == "+") {
 			if (P2 != 'P' && P2 != 'p') {
 				node *polyA = findNumPoly(poly, numPolyA);
@@ -544,6 +552,7 @@ int main() {
 		}
 
 		else if (operatorIn == "div" || operatorIn == "Div" || operatorIn == "DIV" || operatorIn == "/") {
+
 			if (P2 != 'P' && P2 != 'p') {
 				node *polyA = findNumPoly(poly, numPolyA);
 				int num = P2 - 48;
@@ -586,6 +595,31 @@ int main() {
 				node *polyB = findNumPoly(poly, numPolyB);
 				printPoly(divPoly(polyA, polyB));
 			}
+		}
+
+		else if (operatorIn == "cal" || operatorIn == "Cal" || operatorIn == "CAL" || operatorIn == "calculate") {
+			if (P2 != 'P' && P2 != 'p' && P2 != '-') {
+				node *polyA = findNumPoly(poly, numPolyA);
+				float num = P2 - 48;
+
+				if (numPolyB != -1) {
+					int f = log10(numPolyB);//so chu so cua numPolyB
+					int x = 10;
+					for (int i = 0; i < f; i++) x *= 10;
+					num *= x;
+					num += numPolyB;
+				}
+
+				cout << endl << (calPoly(polyA, num)) << endl;
+			}
+			else if (P2 == '-' || P2 == '+') {
+
+				node *polyA = findNumPoly(poly, numPolyA);
+
+				cout << endl << calPoly(polyA, -1*numPolyB) << endl;
+
+			}
+			
 		}
 
 		cout << "continue or not? ";
