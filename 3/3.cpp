@@ -16,6 +16,17 @@ struct polyNode {
 	polyNode *next = NULL;
 };
 
+int sizeNode(node* head) {
+	int size = 0;
+	while (1)
+	{
+		if (head == NULL) break;
+		size++;
+		head = head->next;
+	}
+	return size;
+}
+
 node* ConvertToLinkedList(float *arr, int size) {
 	node *head = NULL;
 	node *pre = NULL;
@@ -115,7 +126,7 @@ void printPoly(node *llist) {
 					cout << " + " << temp->heso;
 				}
 				else 
-					cout << " + " << "x" << temp->mu;
+					cout << " + " << "x^" << temp->mu;
 			}
 			else if (temp->mu == 1) {
 				cout << " + " << temp->heso << "x";
@@ -185,6 +196,29 @@ node *addPoly(node *poly1, node *poly2) {
 	return headRes;
 }
 
+
+node *subPoly(node *poly1, node *poly2) {
+	node* temp = NULL, *result = NULL;
+	while (1)
+	{
+		if (poly2 == NULL) break;
+		addNode(temp, poly2->heso *(-1), poly2->mu);
+		poly2 = poly2->next;
+	}
+	temp = addPoly(poly1, temp);
+	while (1)
+	{
+		if (temp == NULL) break;
+		if (temp->heso == 0) {
+			temp = temp->next;
+			continue;
+		}
+		addNode(result, temp->heso, temp->mu);
+		temp = temp->next;
+	}
+	return result;
+}
+
 node *mulPoly(node *poly1, node *poly2) {
 
 	node *temp1 = poly1, *temp2 = poly2;
@@ -222,6 +256,46 @@ node *mulPoly(node *poly1, node *poly2) {
 	return ConvertToLinkedList(res, bac + 1);
 }
 
+node *divPoly(node *poly1, node *poly2) {
+	node *result = NULL, *temp1 = poly1, *temp2 = poly2;
+
+	if (sizeNode(temp1) < 2) {
+		if (temp1->mu >= temp2->mu) {
+			addNode(result, temp1->heso / poly2->heso, temp1->mu - poly2->mu);
+			temp1 = subPoly(temp1, mulPoly(result, temp2));
+		}
+		else {
+			addNode(result, 0, 0);
+		}
+	}
+	else {
+		while (true)
+		{
+			if (temp1->mu >= poly2->mu) {
+				addNode(result, temp1->heso / poly2->heso, temp1->mu - poly2->mu);
+				if (sizeNode(result) < 2)
+					temp2 = result;
+				else {
+					temp2 = result;
+					for (int k = 1; k != sizeNode(result); k++)
+					{
+						temp2 = temp2->next;
+
+					}
+				}
+				//printPoly(temp1);
+				//printPoly(mulPoly(temp2, poly2));
+				temp1 = subPoly(temp1, mulPoly(poly2, temp2));
+				//printPoly(temp1);
+				if (temp1 == NULL) break;
+			}
+			else break;
+		}
+
+	}
+	return result;
+}
+
 // scan input1 from console (string) to the polynomial 
 void inputPoly(node *&poly, string input1) {
 	
@@ -241,12 +315,20 @@ void inputPoly(node *&poly, string input1) {
 			token = input1.substr(prepos, pos - prepos );
 			stringstream scin(token);
 
-			if (token.substr(0, 1) == "x") {//truong hop k co he so truoc x
+			if (token.substr(0, 1) == "x" || token.find("+x") < 999 ||
+				token.find("-x") < 999) {//truong hop k co he so truoc x
+
 				if (token.find('^') > 999) {
 					muIn = 1;
 					hesoIn = 1;
 				}
-					
+				
+				else if (token.find("+x") < 999 || token.find("-x") < 999) {
+					token = token.substr(1, token.size() - 1);
+					stringstream scin1(token);
+					hesoIn = 1;
+					scin1 >> x >> mu >> muIn;
+				}
 				else {
 					hesoIn = 1;
 					scin >> x >> mu >> muIn;
@@ -323,7 +405,7 @@ int main() {
 		ss >> P1 >> numPolyA >> operatorIn >> P2 >> numPolyB;
 		//cin.ignore(256, '\n');
 
-		if (operatorIn == "add" || operatorIn == "Add" || operatorIn == "ADD") {
+		if (operatorIn == "add" || operatorIn == "Add" || operatorIn == "ADD" || operatorIn == "+") {
 			if (P2 != 'P' && P2 != 'p') {
 				node *polyA = findNumPoly(poly, numPolyA);
 				int num = P2 - 48;
@@ -369,7 +451,52 @@ int main() {
 
 		}
 
-		else if (operatorIn == "mul" || operatorIn == "Mul" || operatorIn == "MUL") {
+		else if (operatorIn == "sub" || operatorIn == "Sub" || operatorIn == "SUB" || operatorIn == "-") {
+			if (P2 != 'P' && P2 != 'p') {
+				node *polyA = findNumPoly(poly, numPolyA);
+				int num = P2 - 48;
+
+				if (numPolyB != -1) {
+					int f = log10(numPolyB);//so chu so cua numPolyB
+					int x = 10;
+					for (int i = 0; i < f; i++) x *= 10;
+					num *= x;
+					num += numPolyB;
+				}
+
+				node *polyNew = new node;
+				polyNew->heso = num;
+				polyNew->mu = 0;
+				polyNew->next = NULL;
+				printPoly(subPoly(polyA, polyNew));
+			}
+
+			else if (P1 != 'P' && P1 != 'p') {
+				node *polyB = findNumPoly(poly, numPolyB);
+				int num = P1 - 48;
+
+				if (numPolyA != -1) {
+					int f = log10(numPolyA);//so chu so cua numPolyB
+					int x = 10;
+					for (int i = 0; i < f; i++) x *= 10;
+					num *= x;
+					num += numPolyA;
+				}
+
+				node *polyNew = new node;
+				polyNew->heso = num;
+				polyNew->mu = 0;
+				polyNew->next = NULL;
+				printPoly(subPoly(polyNew, polyB));
+			}
+			else {
+				node *polyA = findNumPoly(poly, numPolyA);
+				node *polyB = findNumPoly(poly, numPolyB);
+				printPoly(subPoly(polyA, polyB));
+			}
+		}
+
+		else if (operatorIn == "mul" || operatorIn == "Mul" || operatorIn == "MUL" || operatorIn == "*") {
 			if (P2 != 'P' && P2 != 'p') {
 				node *polyA = findNumPoly(poly, numPolyA);
 				int num = P2 - 48;
@@ -412,6 +539,51 @@ int main() {
 				node *polyB = findNumPoly(poly, numPolyB);
 				printPoly(mulPoly(polyA, polyB));
 			}	
+		}
+
+		else if (operatorIn == "div" || operatorIn == "Div" || operatorIn == "DIV" || operatorIn == "/") {
+			if (P2 != 'P' && P2 != 'p') {
+				node *polyA = findNumPoly(poly, numPolyA);
+				int num = P2 - 48;
+
+				if (numPolyB != -1) {
+					int f = log10(numPolyB);//so chu so cua numPolyB
+					int x = 10;
+					for (int i = 0; i < f; i++) x *= 10;
+					num *= x;
+					num += numPolyB;
+				}
+
+				node *polyNew = new node;
+				polyNew->heso = num;
+				polyNew->mu = 0;
+				polyNew->next = NULL;
+				printPoly(divPoly(polyA, polyNew));
+			}
+
+			else if (P1 != 'P' && P1 != 'p') {
+				node *polyB = findNumPoly(poly, numPolyB);
+				int num = P1 - 48;
+
+				if (numPolyA != -1) {
+					int f = log10(numPolyA);//so chu so cua numPolyB
+					int x = 10;
+					for (int i = 0; i < f; i++) x *= 10;
+					num *= x;
+					num += numPolyA;
+				}
+
+				node *polyNew = new node;
+				polyNew->heso = num;
+				polyNew->mu = 0;
+				polyNew->next = NULL;
+				printPoly(divPoly(polyNew, polyB));
+			}
+			else {
+				node *polyA = findNumPoly(poly, numPolyA);
+				node *polyB = findNumPoly(poly, numPolyB);
+				printPoly(divPoly(polyA, polyB));
+			}
 		}
 
 		cout << "continue or not? ";
