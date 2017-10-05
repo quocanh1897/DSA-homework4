@@ -1,8 +1,13 @@
 ﻿  3.cpp
-d:\onedrive - vietscience\ctdl\bc\homework4\3\3.cpp(23): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-d:\onedrive - vietscience\ctdl\bc\homework4\3\3.cpp(218): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-d:\onedrive - vietscience\ctdl\bc\homework4\3\3.cpp(225): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-d:\onedrive - vietscience\ctdl\bc\homework4\3\3.cpp(248): warning C4018: '<': signed/unsigned mismatch
-d:\onedrive - vietscience\ctdl\bc\homework4\3\3.cpp(300): warning C4715: 'findNumPoly': not all control paths return a value
+d:\onedrive - vietscience\ctdl\bc\homework4\3\3.cpp(233): warning C4018: '<': signed/unsigned mismatch
+d:\onedrive - vietscience\ctdl\bc\homework4\3\3.cpp(332): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+d:\onedrive - vietscience\ctdl\bc\homework4\3\3.cpp(340): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+d:\onedrive - vietscience\ctdl\bc\homework4\3\3.cpp(351): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+d:\onedrive - vietscience\ctdl\bc\homework4\3\3.cpp(359): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+d:\onedrive - vietscience\ctdl\bc\homework4\3\3.cpp(378): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+d:\onedrive - vietscience\ctdl\bc\homework4\3\3.cpp(386): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+d:\onedrive - vietscience\ctdl\bc\homework4\3\3.cpp(397): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+d:\onedrive - vietscience\ctdl\bc\homework4\3\3.cpp(405): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+d:\onedrive - vietscience\ctdl\bc\homework4\3\3.cpp(289): warning C4715: 'findNumPoly': not all control paths return a value
   3.vcxproj -> D:\OneDrive - vietscience\CTDL\BC\homework4\Debug\3.exe
   3.vcxproj -> D:\OneDrive - vietscience\CTDL\BC\homework4\Debug\3.pdb (Partial PDB)
